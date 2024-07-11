@@ -6,4 +6,4 @@ export const store = configureStore({
         auth: AuthSliceReducer
     },
     devTools: true
-})
+});
