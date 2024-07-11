@@ -26,6 +26,24 @@ export const createAccount = createAsyncThunk('/auth/createAccount' , async (dat
     } 
 });
 
+export const login = createAsyncThunk('/auth/login', async (data) => {
+    console.log("incoming data to the thunk", data);
+    try {
+        const response = axiosInstance.post('/auth/login', data);    
+        toast.promise(response, {
+            success: (resolvedPromise) => {
+                return resolvedPromise?.data?.message;
+            },
+            loading: 'Hold back tight, we are registering your id...',
+            error: 'Ohh No!, Something went wrong. Please try again.',
+        });
+        const apiResponse = await response;
+        return apiResponse;
+    } catch(error) {
+        console.log(error);
+    }
+});
+
 const AuthSlice = createSlice({
     name: 'auth',
     initialState,

@@ -216,4 +216,4 @@ function SignUpPresentation({handleUserInput,handleFormSubmit}){
     )
 }
 
-export default SignUpPresentation
+export default SignUpPresentation;
