@@ -112,7 +112,7 @@ function Home(){
                                 <div className="inline-flex w-16 h-1 bg-yellow-500 rounded-full"></div>
                             </div>
 
-                            <div className="flex flex-wrap space-y-6 md:space-y-0">
+                            <div className="flex flex-wrap items-center justify-around space-y-6 md:space-y-0">
 
                                 <div className="flex flex-col items-center text-center p-4 md:w-1/3">
                                     <div className="inline-flex items-center justify-center flex-shrink-0 w-20 h-20 mb-5 bg-yellow-100 rounded-full">
