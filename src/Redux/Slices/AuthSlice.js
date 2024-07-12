@@ -27,19 +27,37 @@ export const createAccount = createAsyncThunk('/auth/createAccount' , async (dat
 });
 
 export const login = createAsyncThunk('/auth/login', async (data) => {
-    console.log("incoming data to the thunk", data);
+    console.log("Incoming data to the thunk", data);
     try {
         const response = axiosInstance.post('/auth/login', data);    
         toast.promise(response, {
             success: (resolvedPromise) => {
-                return resolvedPromise?.data?.message;
+                return resolvedPromise ?.data?.message;
             },
-            loading: 'Hold back tight, we are registering your id...',
+            loading: 'Hold back tight, we are logging your id...',
             error: 'Ohh No!, Something went wrong. Please try again.',
         });
         const apiResponse = await response;
         return apiResponse;
-    } catch(error) {
+    } catch (error) {
+        console.log(error);
+    }
+});
+
+export const logout = createAsyncThunk('/auth/logout', async () => {
+    console.log("Incoming logout to the thunk");
+    try {
+        const response = axiosInstance.post('/auth/logout');    
+        toast.promise(response, {
+            success: (resolvedPromise) => {
+                return resolvedPromise ?.data?.message;
+            },
+            loading: 'Logging out ...',
+            error: 'Ohh No!, Something went wrong. Please try again.',
+        });
+        const apiResponse = await response;
+        return apiResponse;
+    } catch (error) {
         console.log(error);
     }
 });
@@ -48,6 +66,29 @@ const AuthSlice = createSlice({
     name: 'auth',
     initialState,
     reducers: {},
+    extraReducers: (builder) => {
+        builder
+        .addCase(login.fulfilled, (state,action) =>{
+            // reducer which will execute when login thunk is fullfilled
+            state.isLoggedIn = true;
+            state.role = action?.payload?.data?.data?.userRole;
+            state.data = action?.payload?.data?.data?.userData;
+
+            localStorage.setItem('isLoggedIn', true);
+            localStorage.setItem('role', action?.payload?.data?.data?.userRole);
+            localStorage.setItem('data', JSON.stringify(action?.payload?.data?.data?.userData));
+        })
+        .addCase(logout.fulfilled, (state) =>{
+            localStorage.setItem('isLoggedIn', false);
+            localStorage.setItem('role', '');
+            localStorage.setItem('data', JSON.stringify({}));
+            window.location.href = '/auth/login';
+
+            state.isLoggedIn = false;
+            state.role = '';
+            state.data = {};
+        })
+    }
 });
 
 export default AuthSlice.reducer;

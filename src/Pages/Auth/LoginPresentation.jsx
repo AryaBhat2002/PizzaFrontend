@@ -1,6 +1,50 @@
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import toast from "react-hot-toast";
+import { useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { login } from "../../Redux/Slices/AuthSlice";
 
-function LoginPresentation({ handleFormSubmit, handleUserInput }) {
+function LoginPresentation() {
+
+    const [loginData, setLoginData] = useState({
+        email: '',
+        password: ''
+    });
+
+    function handleInput(e) {
+        const {name, value} = e.target;
+        setLoginData({
+            ...loginData,
+            [name]: value
+        })
+    } 
+
+    async function handleSubmit(e) {
+        e.preventDefault();  // prevent the form from reloading the page
+        console.log(loginData);
+
+        // Add validations for the form input
+        if(!loginData.email || !loginData.password ) {
+            toast.error("Missing values from the form")
+            return;
+        }
+
+        // check email
+        if(!loginData.email.includes('@') || !loginData.email.includes('.')) {
+            toast.error("Invalid email address")
+            return;
+        }
+
+        const apiResponse = await dispatch(login(loginData));
+        console.log("Api response", apiResponse);
+        if(apiResponse.payload.data.success){
+            navigate('/');
+        }
+    }
+
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
     return (
         <>
             <section className="text-gray-600 body-font">
@@ -153,7 +197,7 @@ function LoginPresentation({ handleFormSubmit, handleUserInput }) {
                                 type="email" 
                                 id="email" 
                                 name="email" 
-                                onChange={handleUserInput}
+                                onChange={handleInput}
                                 required 
                                 placeholder="John@example.com"
                                 className="w-full px-3 py-1 mt-2 text-base leading-8 text-gray-700 transition-colors duration-200 ease-in-out border border-gray-300 rounded outline-noe focus:border-yellow-500 focus:ring-2 focus:ring-yellow-200" />
@@ -165,20 +209,19 @@ function LoginPresentation({ handleFormSubmit, handleUserInput }) {
                                 type="password" 
                                 id="password" 
                                 name="password" 
-                                onChange={handleUserInput}
+                                onChange={handleInput}
                                 required 
                                 placeholder="Enter your password"
                                 className="w-full px-3 py-1 mt-2 text-base leading-8 text-gray-700 transition-colors duration-200 ease-in-out border border-gray-300 rounded outline-noe focus:border-yellow-500 focus:ring-2 focus:ring-yellow-200" />
                         </div>
 
                         <button 
-                            type="submit"
-                            onClick={handleFormSubmit}
+                            onClick={handleSubmit}
                             className="w-full px-8 py-2 text-lg text-white bg-yellow-500 border-0 rounded focus:outline-none hover:bg-yellow-600">
                             Sign In
                         </button>
 
-                        <p className="mt-3 text-xs text-gray-500">Donot have an account ? 
+                        <p className="mt-3 text-xs text-gray-500">Do not have an account ? 
                         <Link to="/auth/signup" className="text-yellow-500">Sign Up</Link>
                         </p>
                     </form>

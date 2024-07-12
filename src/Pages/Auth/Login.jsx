@@ -1,27 +1,31 @@
-import { useState } from "react";
+/*import { useState } from "react";
 import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import { login } from "../../Redux/Slices/AuthSlice";
 import LoginPresentation from "./LoginPresentation";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
+
     const [loginData, setLoginData] = useState({
         email: '',
         password: ''
     });
-    function handleUserInput(e) {
+
+    function handleInput(e) {
         const {name, value} = e.target;
         setLoginData({
-         ...loginData,
-         [name]: value
+            ...loginData,
+            [name]: value
         })
         console.log("Hi");
-     }
+    }
 
-     async function handleFormSubmit(e) {
+    async function handleSubmit(e) {
         console.log("In handle submit");
-        e.stopPropagation() // prevent the form from reloading the page
+        e.preventDefault();  // prevent the form from reloading the page
         console.log(loginData);
 
         // Add validations for the form input
@@ -36,13 +40,19 @@ function Login() {
             return;
         }
 
-        const apiReponse = await dispatch(login(loginData));
-        console.log("Api response", apiReponse);
-    }
+        const apiResponse = await dispatch(login(loginData));
+        console.log("Api response", apiResponse);
+        if(apiResponse.payload.data.success){
+            navigate('/');
+        }
+    } 
 
     return (
-        <LoginPresentation handleFormSubmit={handleFormSubmit} handleUserInput={handleUserInput} />
+        <LoginPresentation 
+            handleInput={handleInput} 
+            handleSubmit={handleSubmit}
+        />
     )
 }
 
-export default Login;
+export default Login; */
