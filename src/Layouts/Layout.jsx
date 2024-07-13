@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -6,6 +7,8 @@ import Footer from '../Components/Footer';
 import { Link, useNavigate } from 'react-router-dom';
 import { logout } from '../Redux/Slices/AuthSlice';
 import CartIcon from '../assets/Images/cart.svg'
+import { useEffect } from 'react';
+import { getCartDetails } from '../Redux/Slices/CartSlice';
 
 function Layout({children}) {
 
@@ -19,6 +22,10 @@ function Layout({children}) {
         e.preventDefault();
         dispatch(logout());
     }
+
+    useEffect(() => {
+        dispatch(getCartDetails());
+    }, []);
 
     return(
         <div>

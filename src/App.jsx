@@ -10,6 +10,7 @@ import AddProduct from './Pages/Admin/AddProduct'
 import LoginPresentation from './Pages/Auth/LoginPresentation.jsx'
 import ProductDetails from './Pages/Products/ProductDetails.jsx'
 import CartDetails from './Pages/Cart/CartDetails.jsx'
+import Order from './Pages/Order/Order.jsx'
 
 function App() {
 
@@ -23,6 +24,7 @@ function App() {
         <Route path='/product/:productId' element={<ProductDetails />} />
         <Route path='/cart' element={<CartDetails />} />
         <Route path='/denied' element={<Denied />} />
+        <Route path='/order' element={<Order />} />
         <Route path='*' element={<NotFound />} />
       </Routes>
     </>
