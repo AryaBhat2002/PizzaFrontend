@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import Layout from "../../Layouts/Layout";
 import { useDispatch, useSelector } from "react-redux";
-import toast from "react-hot-toast";
 import { useState } from "react";
+import toast from "react-hot-toast";
 import { placeOrder } from "../../Redux/Slices/OrderSlice";
 
 function Order() {
@@ -19,8 +19,8 @@ function Order() {
     function handleUserInput(e) {
         const {name, value} = e.target;
         setDetails({
-            ...details,
-            [name]: value
+         ...details,
+         [name]: value
         })
     }
 
@@ -44,31 +44,30 @@ function Order() {
 
     }
 
-    return(
+    return (
         <Layout>
             <section className="text-gray-600 body-font min-h-56">
-                <div className="containner px-5 py-24 mx-auto">
+
+                <div className="container px-5 py-24 mx-auto">
                     <div className="flex flex-col text-center w-full mb-12">
-                        <h1 className="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">
-                            Thanks for Choosing Us
-                            {' '}
-                        </h1>
+                        <h1 className="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">Thanks for Choosing Us {' '}</h1>
+
                         <p className="lg:w-2/3 mx-auto leading-relaxed text-base">
                             Total Price - 
                             <span className="font-bold text-red-900">
-                            ₹ {cartsData?.items?.length === 0
-                            ? ''
-                            : cartsData?.items?.reduce((acc, item) => acc + item?.quantity*item?.product?.price , 0) }
+                                ₹ {cartsData?.items?.length === 0
+                          ? ''
+                          : cartsData?.items?.reduce((acc, item) => acc + item?.quantity*item?.product?.price , 0) }
                             </span>
-                        </p>
+                        </p> 
                     </div>
 
-                    <form>
-                        <div className='relative flex-grow w-full'>
-                            <label htmlFor="paymentMethod" className="leading-7 text-2xl text-gray-600">
+                    <form onSubmit={handleFormSubmit}>
+                        <div className="relative flex-grow w-full">
+                            <label htmlFor="paymentMethod" className="text-2xl leading-7 text-gray-600">
                                 Payment Method
                             </label>
-                            <select
+                            <select 
                                 name="paymentMethod"
                                 required
                                 onChange={handleUserInput}
@@ -83,26 +82,26 @@ function Order() {
                             <label htmlFor="address" className="leading-7 text-2xl text-gray-600">
                                 Address
                             </label>
-                            <textarea
+                            <textarea 
                                 name="address"
-                                placeholder="Enter your address here.."
-                                required
+                                placeholder="Enter your address here..."
                                 onChange={handleUserInput}
                                 className="w-full p-2 border rounded-md focus:outline-none focus:border-primary-500 bg-white text-gray-700"
                             >
                             </textarea>
-
-                            <button
-                                onChange={handleFormSubmit} 
-                                className="text-white bg-yellow-500 border-0 py-2 px-6 focus:outline-none hover:bg-primary-600 rounded text-lg">
-                                Place Order
-                            </button>
                         </div>
+
+                        <button 
+                            className="text-white bg-yellow-500 border-0 py-2 px-6 focus:outline-none hover:bg-primary-600 rounded text-lg"
+                        >
+                            Place Order
+                        </button>
                     </form>
                 </div>
+
             </section>
         </Layout>
-    )
+    );
 }
 
 export default Order;

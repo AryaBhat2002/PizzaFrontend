@@ -1,10 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-    getCartDetails,
-    removeProductFromCart,
-} from "../../Redux/Slices/CartSlice";
+import { getCartDetails, removeProductFromCart } from "../../Redux/Slices/CartSlice";
 import Layout from "../../Layouts/Layout";
 import { Link } from "react-router-dom";
 
@@ -62,7 +59,6 @@ function CartDetails() {
                                                         </Link>
                                                     </p>
                                                     <p> ₹{item?.product?.price} </p>
-
                                                     <div className="flex items-center gap-4">
                                                         {item._id && (
                                                             <button
@@ -97,13 +93,11 @@ function CartDetails() {
                                     ))}
                                 </div>
                             </div>
-
                             <div className="flex-1 max-w-4xl mx-auto mt-6 space-y-6 lg:mt-0 lg:w-full">
                                 <div className="p-4 space-y-4 text-gray-800 border rounded-lg shadow-sm bg-gradient-to-r from-amber-50 to-orange-300 sm:p-6">
                                     <p className="text-xl font-semibold text-gray-900 ">
                                         Order summary
                                     </p>
-
                                     <div className="space-y-4">
                                         <div className="space-y-2">
                                             <dl className="flex items-center justify-between gap-4">
@@ -122,7 +116,6 @@ function CartDetails() {
                                                 })}
                                             </dl>
                                         </div>
-
                                         <dl className="flex items-center justify-between gap-4 pt-2 border-t border-gray-200 dark:border-gray-700">
                                             <dt className="text-base font-bold ">Total</dt>
                                             <dd className="text-base font-bold ">
@@ -145,7 +138,6 @@ function CartDetails() {
                                             Proceed to Checkout
                                         </Link>
                                     )}
-
                                     <div className="flex items-center justify-center gap-2">
                                         <span className="text-sm font-normal text-gray-500 dark:text-gray-400">
                                             {" "}

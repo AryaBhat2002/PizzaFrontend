@@ -23,8 +23,17 @@ function Layout({children}) {
         dispatch(logout());
     }
 
+    async function fetchCartDetails() {
+        const res = await dispatch(getCartDetails());
+        if(res?.payload?.isUnauthorized){
+            dispatch(logout());
+        }
+    }
+
     useEffect(() => {
-        dispatch(getCartDetails());
+        if(isLoggedIn);{
+            fetchCartDetails();
+        }
     }, []);
 
     return(
