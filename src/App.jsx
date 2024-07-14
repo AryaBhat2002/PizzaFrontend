@@ -24,11 +24,10 @@ function App() {
         <Route path='/product/:productId' element={<ProductDetails />} />
         
         <Route path='/denied' element={<Denied />} />
-        
+        <Route path='/cart' element={<CartDetails />} />
         <Route path='*' element={<NotFound />} />
 
         <Route element={<RequireAuth />}>
-          <Route path='/cart' element={<CartDetails />} />
           <Route path='/order' element={<Order />} />
           <Route path='/order/success' element={<OrderSuccess />} />
         </Route>

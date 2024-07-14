@@ -3,8 +3,8 @@ import Food from '../../assets/Images/food.svg';
 function AddProduct() {
     return (
         <Layout>
-        <section className="py-12">
-            <div className="flex items-center justify-center px-5">
+           <section className="py-12">
+           <div className="flex items-center justify-center px-5">
                 <div className="md:w-2/6">
                     <img src={Food} />
                 </div>
@@ -138,9 +138,9 @@ function AddProduct() {
                         </button>
                     </form>
                 </div>
-            </div>
+           </div>
             
-        </section>
+           </section>
         </Layout>
     )
 }

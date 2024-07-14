@@ -1,3 +1,4 @@
+
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import axiosInstance from "../../Helpers/axiosInstance";
 import toast from "react-hot-toast";
@@ -57,7 +58,6 @@ export const getCartDetails = createAsyncThunk('/cart/getDetails', async () => {
                 isUnauthorized: true
             }
         }
-        toast.error('Something went wrong');
     }
 });
 
